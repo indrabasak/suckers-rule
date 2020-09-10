@@ -1,0 +1,47 @@
+{
+  "title": "Udon",
+  "message": {
+    "text": "This is a Shiuli configured landing page of an example Spring Boot application.",
+    "path": "welcome.md"
+  },
+  "menu": [
+    {
+      "name": "Swagger",
+      "endpoint": "/rules/swagger-ui/index.html",
+      "type": "html",
+      "embed": true
+    }
+  ],
+  "links": [
+    {
+      "name": "Health",
+      "endpoint": "health",
+      "type": "json",
+      "embed": true
+    },
+    {
+      "name": "Beans",
+      "endpoint": "beans",
+      "type": "json",
+      "embed": true
+    },
+    {
+      "name": "Info",
+      "endpoint": "info",
+      "type": "json",
+      "embed": true
+    },
+    {
+      "name": "Environment",
+      "endpoint": "env",
+      "type": "json",
+      "embed": true
+    },
+    {
+      "name": "Mappings",
+      "endpoint": "mappings",
+      "type": "json",
+      "embed": true
+    }
+  ]
+}

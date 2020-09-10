@@ -1,0 +1,27 @@
+server:
+  servlet:
+    context-path: /rules
+  port: 8080
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: "*"
+
+# For Spring Actuator /info endpoint
+info:
+  artifact: udon
+  name: Udon Service
+  description: An example of Pseudonymization
+  version: 1.0.0
