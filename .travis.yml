@@ -1,20 +1,19 @@
 language: java
 jdk:
-  - openjdk11
+- openjdk11
 before_script:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-  - mvn clean install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=indrabasak-github
-    -Dsonar.login=$SONAR_TOKEN
+- mvn clean install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=indrabasak-github
+  -Dsonar.login=$SONAR_TOKEN
 cache:
   directories: "– $HOME/.m2 – $HOME/.sonar/cache"
 notifications:
   email:
-    - indra.basak1@gmail.com
+  - indra.basak1@gmail.com
   on_success: change
   on_failure: always
   use_notice: true
 env:
   global:
-    secure: pITC6fkn4HylK8QH1jSAhjX/g/ih/HuoBxt9a9dkoH3k/sriPtqccnRQ+RNfEEui8zsltKIDd3p8xCCkbLXbq1CzaiB48LfcwM2KwV4ilkzgtsLUtn1HPg86KDkw6Q+37Cdiud/CtLEQ7TP/tnX7fiIbWb4m/aFG+ESmrwL/cjuw4WkVFTHhXsCWB5l3ftFDjIU+vnwfC++vcr8RMNyUk3zdhC6C1u7Hf4CPi6aHRQkL9xk2uncfB/islS5WAAdNl8W06mxoJsRdGI7JGaQX1EWnZey84Ac1AO9ljPCgUounEiS8gNerPgPlKtjI1/6bilhsC8N6/mfoYZCKgRwLvGMeRpjzdJwOo2aVHCzXuTg/cVMYztY8NrA/iLFGEhdjF/9cPo1690z5Y0sT1y5BnKQ3xy0uGV10ytanYwdBEFW6F1N0757qtBBHgU4i7kc6GGD7XpkZ+945LSxziTmMFZuLxGaGOyVy0W46sXy3dYRwQXByNEnLsS0a7cbqg/U2TfksP8/+QKjpmQWMRi1hJsDb+C1D+sUGxMMTuNCIuIfwFwvUWuqJ+BKgp4Vqu0ih3AdvvNk8+fXqnRkgrCgMgDlOTYfSh5fDM7hIAuiJb5lrMrahhr23NOIpG6J2IMBdZcrUoZMUxZVYGh4m16tSXhoHBVZFjuxFCfAy/18AJSY=
-
+  - secure: cJX86NcFvor+J+tbn7CAbpjcJCef85BOQdZAzq/AhtzGWm4ijqwyptFPVfGC0ojSSCPBpNawtcyVc8HzO2lKGR2HYihxfrrBQcUY1HXN96KwW2Up0Uhz3Yv5Bp2/TsgHJtZmZ7iKrZ9E3o8P5twbZMRUbi3WyfZK4lDhEPpBwNT91d56hsa07EMgB91coCdqB5uc54ss+vjXjoOXffxjqUEeLCtmRax9Vb9rf4xFSomIrbCsJlDVZ1KSGF8JyvHxB9LzeUdGJXU4dTD298LhhTrpip/af7juQrdY1frCg7X/Vma5fhCxvk7BH09uUxPl03Y7XrqAMMMXqsJr9skvC2WGBc1ZWOgJIX2ML6+DFULOle9ga7+xoHhJold8sGHQbR5+gR5aRVI2EktfNMG9euqIQ0lR3OapoZmnPLHfUUTAmVGsjxgbLwwygBqQhcft4lUD6znHoUqSKmIk5hInTfM2ovnVRx35Pc+dRUBvvYvRkVp5WvAm58+BPrRK5w9HDNnzKHXw/xhq6o4WisoW+NasP/SnGetetjN6BhB8VeFbvjyNdUz/wHzCkNJmM/2Q0hGC0lS+VQ89J0MlFxnWnZdxOpZxJSS6xyVS3RNKvS8UgDXkat5IvHjbgimGR4YvlqnT5qhpRdZA7xKOVYO5miczhYhxTfgyvxCefPvKmgk=
