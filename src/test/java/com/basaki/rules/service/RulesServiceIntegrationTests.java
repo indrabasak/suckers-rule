@@ -1,10 +1,8 @@
 package com.basaki.rules.service;
 
 
-import com.basaki.rules.model.Message;
 import com.basaki.rules.model.TaxiRide;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -23,19 +21,6 @@ class RulesServiceIntegrationTests {
     @Autowired
     private RulesService service;
 
-    @ParameterizedTest
-    @MethodSource
-    void testCalculateFare(boolean nightSurcharge, long distanceInMile,
-                                  long expectedCharge) {
-        TaxiRide taxiRide = new TaxiRide();
-        taxiRide.setIsNightSurcharge(nightSurcharge);
-        taxiRide.setDistanceInMile(distanceInMile);
-
-        Long totalCharge = service.calculateFare(taxiRide);
-        assertNotNull(totalCharge);
-        assertEquals(expectedCharge, totalCharge);
-    }
-
     static Stream<Arguments> testCalculateFare() {
         return Stream.of(
                 Arguments.arguments(false, 9, 70),
@@ -47,17 +32,30 @@ class RulesServiceIntegrationTests {
         );
     }
 
-    @ParameterizedTest
-    @MethodSource
-    void testSayHello(int status) {
-        String msg = service.sayHello(status);
-        System.out.println(msg);
-    }
-
     static Stream<Arguments> testSayHello() {
         return Stream.of(
                 Arguments.arguments(0),
                 Arguments.arguments(1)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testCalculateFare(boolean nightSurcharge, long distanceInMile,
+                           long expectedCharge) {
+        TaxiRide taxiRide = new TaxiRide();
+        taxiRide.setIsNightSurcharge(nightSurcharge);
+        taxiRide.setDistanceInMile(distanceInMile);
+
+        Long totalCharge = service.calculateFare(taxiRide);
+        assertNotNull(totalCharge);
+        assertEquals(expectedCharge, totalCharge);
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testSayHello(int status) {
+        String msg = service.sayHello(status);
+        System.out.println(msg);
     }
 }
