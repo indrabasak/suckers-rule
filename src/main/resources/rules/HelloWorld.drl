@@ -1,7 +1,5 @@
 import com.basaki.rules.model.Message;
 
-global java.util.List list
-
 rule "Hello World"
     dialect "mvel"
     when

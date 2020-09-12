@@ -3,7 +3,6 @@ package com.basaki.rules.service;
 import com.basaki.rules.model.Fare;
 import com.basaki.rules.model.Message;
 import com.basaki.rules.model.TaxiRide;
-import java.util.ArrayList;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ public class RulesService {
 
     public String sayHello(Message message) {
         KieSession session = container.newKieSession();
-        session.setGlobal("list", new ArrayList<>());
         session.insert(message);
         session.fireAllRules();
         session.dispose();
