@@ -1,12 +1,11 @@
 package com.basaki.rules.controller;
 
+import com.basaki.rules.model.Message;
 import com.basaki.rules.model.TaxiRide;
 import com.basaki.rules.service.RulesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,10 +35,10 @@ public class RulesController {
         return service.calculateFare(taxiRide);
     }
 
-    @GetMapping(value = {"/hello/{status}"},
-            produces = {"application/json"}
-    )
-    public String sayHello(@PathVariable("id") int status) {
-        return service.sayHello(status);
+    @PostMapping(value = {"/hello"},
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.TEXT_PLAIN_VALUE})
+    public String sayHello(@RequestBody Message message) {
+        return service.sayHello(message);
     }
 }

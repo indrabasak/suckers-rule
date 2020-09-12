@@ -26,16 +26,13 @@ public class RulesService {
         return rideFare.getTotalFare();
     }
 
-    public String sayHello(int status) {
+    public String sayHello(Message message) {
         KieSession session = container.newKieSession();
         session.setGlobal("list", new ArrayList<>());
-        Message message = new Message();
-        message.setStatus(status);
-        message.setMessage("hello there!");
         session.insert(message);
         session.fireAllRules();
         session.dispose();
 
-        return message.getMessage();
+        return message.getText();
     }
 }

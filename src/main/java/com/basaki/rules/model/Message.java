@@ -1,26 +1,28 @@
 package com.basaki.rules.model;
 
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Message {
-    public static final int HELLO   = 0;
 
-    public static final int GOODBYE = 1;
+    public enum Status {
 
-    private String          message;
+        HELLO("Hello"), GOODBYE("Goodbye");
 
-    private int             status;
+        private String value;
 
-    public static Message doSomething(Message message) {
-        return message;
+        Status(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 
-    public boolean isSomething(String msg, List<Object> list) {
-        list.add( this );
-        return this.message.equals( msg );
-    }
+    private String text;
+
+    private Status status;
 }
