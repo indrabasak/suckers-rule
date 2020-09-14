@@ -1,9 +1,15 @@
 package com.basaki.rules.model;
 
+import lombok.Getter;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class State {
+
+    public enum NAME { A, B, C, D }
+
+    public enum STATE_TYPE {NOTRUN, FINISHED}
 
     public static final int NOTRUN = 0;
 
@@ -11,37 +17,25 @@ public class State {
 
     private final PropertyChangeSupport changes = new PropertyChangeSupport(this);
 
-    private String name;
+    @Getter
+    private NAME name;
 
-    private int state;
+    @Getter
+    private STATE_TYPE state;
 
-    public State() {
-
-    }
-
-    public State(final String name) {
+    public State(final NAME name) {
         this.name = name;
-        this.state = State.NOTRUN;
+        this.state = STATE_TYPE.NOTRUN;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public int getState() {
-        return this.state;
-    }
-
-    public void setState(final int newState) {
-        final int oldState = this.state;
+    public void setState(final STATE_TYPE newState) {
+        STATE_TYPE oldState = this.state;
         this.state = newState;
-        this.changes.firePropertyChange("state",
-                oldState,
-                newState);
+        this.changes.firePropertyChange("state", oldState, newState);
     }
 
-    public boolean inState(final String name,
-                           final int state) {
+    public boolean inState(final NAME name,
+                           final STATE_TYPE state) {
         return this.name.equals(name) && this.state == state;
     }
 

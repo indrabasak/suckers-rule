@@ -9,6 +9,8 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class RulesService {
 
@@ -35,19 +37,9 @@ public class RulesService {
         return message.getText();
     }
 
-    public void changeStateUsingSalience(State state) {
+    public void changeStateUsingSalience(State... states) {
         KieSession session = container.newKieSession();
-        final State a = new State( "A" );
-        final State b = new State( "B" );
-        final State c = new State( "C" );
-        final State d = new State( "D" );
-
-        session.insert( a );
-        session.insert( b );
-        session.insert( c );
-        session.insert( d );
-
-        //session.insert(state);
+        Arrays.stream(states).forEach(session::insert);
         session.fireAllRules();
         session.dispose();
     }

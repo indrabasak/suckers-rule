@@ -4,6 +4,8 @@ package com.basaki.rules.service;
 import com.basaki.rules.model.Message;
 import com.basaki.rules.model.State;
 import com.basaki.rules.model.TaxiRide;
+
+import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -69,7 +71,9 @@ class RulesServiceIntegrationTests {
 
     @Test
     void testChangeStateUsingSalience() {
-        State state = new State("A");
-        service.changeStateUsingSalience(state);
+        State[] states = {new State(State.NAME.A), new State(State.NAME.B),
+                new State(State.NAME.C), new State(State.NAME.D)};
+        service.changeStateUsingSalience(states);
+        Arrays.stream(states).forEach(s -> assertEquals(State.STATE_TYPE.FINISHED, s.getState()));
     }
 }

@@ -6,37 +6,37 @@ end
 
 rule Bootstrap
     when
-        a : State(name == "A", state == State.NOTRUN )
+        a : State(name == State.NAME.A, state == State.STATE_TYPE.NOTRUN )
     then
         System.out.println(a.getName() + " finished" );
-        a.setState( State.FINISHED );
+        a.setState( State.STATE_TYPE.FINISHED );
 end
 
 
 rule "A to B"
     when
-        State(name == "A", state == State.FINISHED )
-        b : State(name == "B", state == State.NOTRUN )
+        State(name == State.NAME.A, state == State.STATE_TYPE.FINISHED )
+        b : State(name == State.NAME.B, state == State.STATE_TYPE.NOTRUN )
     then
         System.out.println(b.getName() + " finished" );
-        b.setState( State.FINISHED );
+        b.setState( State.STATE_TYPE.FINISHED );
 end
 
 rule "B to C"
-    salience 10
     when
-        State(name == "B", state == State.FINISHED )
-        c : State(name == "C", state == State.NOTRUN )
+        State(name == State.NAME.B, state == State.STATE_TYPE.FINISHED )
+        c : State(name == State.NAME.C, state == State.STATE_TYPE.NOTRUN )
     then
         System.out.println(c.getName() + " finished" );
-        c.setState( State.FINISHED );
+        c.setState( State.STATE_TYPE.FINISHED );
 end
 
 rule "B to D"
+    salience 10
     when
-        State(name == "B", state == State.FINISHED )
-        d : State(name == "D", state == State.NOTRUN )
+        State(name == State.NAME.B, state == State.STATE_TYPE.FINISHED )
+        d : State(name == State.NAME.D, state == State.STATE_TYPE.NOTRUN )
     then
         System.out.println(d.getName() + " finished" );
-        d.setState( State.FINISHED );
+        d.setState( State.STATE_TYPE.FINISHED );
 end
