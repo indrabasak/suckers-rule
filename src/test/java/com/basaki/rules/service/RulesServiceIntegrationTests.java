@@ -2,8 +2,10 @@ package com.basaki.rules.service;
 
 
 import com.basaki.rules.model.Message;
+import com.basaki.rules.model.State;
 import com.basaki.rules.model.TaxiRide;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -63,5 +65,11 @@ class RulesServiceIntegrationTests {
                 Arguments.arguments(Message.Status.GOODBYE, "Do nothing!",
                         Message.Status.GOODBYE.getValue() + " Do nothing!")
         );
+    }
+
+    @Test
+    void testChangeStateUsingSalience() {
+        State state = new State("A");
+        service.changeStateUsingSalience(state);
     }
 }

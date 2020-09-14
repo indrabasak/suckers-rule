@@ -2,6 +2,7 @@ package com.basaki.rules.service;
 
 import com.basaki.rules.model.Fare;
 import com.basaki.rules.model.Message;
+import com.basaki.rules.model.State;
 import com.basaki.rules.model.TaxiRide;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -32,5 +33,22 @@ public class RulesService {
         session.dispose();
 
         return message.getText();
+    }
+
+    public void changeStateUsingSalience(State state) {
+        KieSession session = container.newKieSession();
+        final State a = new State( "A" );
+        final State b = new State( "B" );
+        final State c = new State( "C" );
+        final State d = new State( "D" );
+
+        session.insert( a );
+        session.insert( b );
+        session.insert( c );
+        session.insert( d );
+
+        //session.insert(state);
+        session.fireAllRules();
+        session.dispose();
     }
 }

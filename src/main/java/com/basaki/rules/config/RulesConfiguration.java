@@ -16,6 +16,7 @@ public class RulesConfiguration {
 
     private static final String HELLO_WORLD_RULE = "rules/HelloWorld.drl";
 
+    private static final String STATE_USING_SALIENCE_RULE = "rules/StateExampleUsingSalience.drl";
 
     @Bean
     public KieContainer getContainer() {
@@ -24,6 +25,7 @@ public class RulesConfiguration {
         KieFileSystem fileSystem = services.newKieFileSystem();
         fileSystem.write(ResourceFactory.newClassPathResource(RULES_TAXI_FARE_RULE));
         fileSystem.write(ResourceFactory.newClassPathResource(HELLO_WORLD_RULE));
+        fileSystem.write(ResourceFactory.newClassPathResource(STATE_USING_SALIENCE_RULE));
         KieBuilder builder = services.newKieBuilder(fileSystem);
         builder.buildAll();
         KieModule kieModule = builder.getKieModule();
