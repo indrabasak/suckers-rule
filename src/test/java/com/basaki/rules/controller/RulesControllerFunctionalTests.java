@@ -25,14 +25,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * {@code RulesControllerFunctionalTests} represents functional tests for
  * {@code RulesController}.
- * <p/>
+ * <p>
  *
  * @author Indra Basak
  * @since 09/15/20
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RulesControllerFunctionalTests {
+class RulesControllerFunctionalTests {
 
     @Value("${local.server.port}")
     private Integer port;
