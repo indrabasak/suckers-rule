@@ -19,6 +19,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * {@code RulesServiceIntegrationTests} represents integration tests for
+ * {@code RulesService}.
+ * <p/>
+ *
+ * @author Indra Basak
+ * @since 09/09/20
+ */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class RulesServiceIntegrationTests {
@@ -75,5 +83,19 @@ class RulesServiceIntegrationTests {
                 new State(State.NAME.C), new State(State.NAME.D)};
         service.changeStateUsingSalience(states);
         Arrays.stream(states).forEach(s -> assertEquals(State.STATE_TYPE.FINISHED, s.getState()));
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testFibonacci(int sequence, long expected) {
+        assertEquals(expected, service.fibonacci(sequence));
+    }
+
+    static Stream<Arguments> testFibonacci() {
+        return Stream.of(
+                Arguments.arguments(5, 5),
+                Arguments.arguments(7, 13),
+                Arguments.arguments(13, 233)
+        );
     }
 }

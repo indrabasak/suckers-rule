@@ -9,6 +9,14 @@ import org.kie.internal.io.ResourceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * {@code RulesConfiguration} is responsible for configuring rules and creating the
+ * rules container.
+ * <p>
+ *
+ * @author Indra Basak
+ * @since 09/09/20
+ */
 @Configuration
 public class RulesConfiguration {
 
@@ -18,6 +26,8 @@ public class RulesConfiguration {
 
     private static final String STATE_USING_SALIENCE_RULE = "rules/StateExampleUsingSalience.drl";
 
+    private static final String FIBONACCI_RULE = "rules/Fibonacci.drl";
+
     @Bean
     public KieContainer getContainer() {
         KieServices services = KieServices.Factory.get();
@@ -26,6 +36,7 @@ public class RulesConfiguration {
         fileSystem.write(ResourceFactory.newClassPathResource(RULES_TAXI_FARE_RULE));
         fileSystem.write(ResourceFactory.newClassPathResource(HELLO_WORLD_RULE));
         fileSystem.write(ResourceFactory.newClassPathResource(STATE_USING_SALIENCE_RULE));
+        fileSystem.write(ResourceFactory.newClassPathResource(FIBONACCI_RULE));
         KieBuilder builder = services.newKieBuilder(fileSystem);
         builder.buildAll();
         KieModule kieModule = builder.getKieModule();

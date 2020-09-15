@@ -1,6 +1,7 @@
 package com.basaki.rules.service;
 
 import com.basaki.rules.model.Fare;
+import com.basaki.rules.model.Fibonacci;
 import com.basaki.rules.model.Message;
 import com.basaki.rules.model.State;
 import com.basaki.rules.model.TaxiRide;
@@ -11,11 +12,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
+/**
+ * {@code RulesService} is responsible for exposing the rules as a service.
+ * <p>
+ *
+ * @author Indra Basak
+ * @since 09/09/20
+ */
 @Service
 public class RulesService {
 
-    @Autowired
     private KieContainer container;
+
+    @Autowired
+    public RulesService(KieContainer container) {
+        this.container = container;
+    }
 
     public Long calculateFare(TaxiRide taxiRide) {
         KieSession session = container.newKieSession();
@@ -42,5 +54,15 @@ public class RulesService {
         Arrays.stream(states).forEach(session::insert);
         session.fireAllRules();
         session.dispose();
+    }
+
+    public long fibonacci(int sequence) {
+        KieSession session = container.newKieSession();
+        Fibonacci fibonacci = new Fibonacci(sequence);
+        session.insert(fibonacci);
+        session.fireAllRules();
+        session.dispose();
+
+        return fibonacci.getValue();
     }
 }
