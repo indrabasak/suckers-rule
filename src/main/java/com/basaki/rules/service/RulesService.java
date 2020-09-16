@@ -1,10 +1,12 @@
 package com.basaki.rules.service;
 
+import com.basaki.rules.model.AgendaMessage;
 import com.basaki.rules.model.Fare;
 import com.basaki.rules.model.Fibonacci;
 import com.basaki.rules.model.Message;
 import com.basaki.rules.model.State;
 import com.basaki.rules.model.TaxiRide;
+import org.kie.api.event.rule.DefaultAgendaEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +66,14 @@ public class RulesService {
         session.dispose();
 
         return fibonacci.getValue();
+    }
+
+    public void agendaEvent(int code, String text, DefaultAgendaEventListener listener) {
+        KieSession session = container.newKieSession();
+        session.addEventListener(listener);
+        AgendaMessage message = new AgendaMessage(code, text);
+        session.insert(message);
+        session.fireAllRules();
+        session.dispose();
     }
 }

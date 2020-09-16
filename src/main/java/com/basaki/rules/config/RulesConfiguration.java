@@ -28,6 +28,8 @@ public class RulesConfiguration {
 
     private static final String FIBONACCI_RULE = "rules/Fibonacci.drl";
 
+    private static final String AGENDA_EVENT_LISTENER_RULE = "rules/AgendaEventListenerSample.drl";
+
     @Bean
     public KieContainer getContainer() {
         KieServices services = KieServices.Factory.get();
@@ -37,6 +39,7 @@ public class RulesConfiguration {
         fileSystem.write(ResourceFactory.newClassPathResource(HELLO_WORLD_RULE));
         fileSystem.write(ResourceFactory.newClassPathResource(STATE_USING_SALIENCE_RULE));
         fileSystem.write(ResourceFactory.newClassPathResource(FIBONACCI_RULE));
+        fileSystem.write(ResourceFactory.newClassPathResource(AGENDA_EVENT_LISTENER_RULE));
         KieBuilder builder = services.newKieBuilder(fileSystem);
         builder.buildAll();
         KieModule kieModule = builder.getKieModule();

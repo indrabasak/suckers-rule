@@ -12,12 +12,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.kie.api.event.rule.AfterMatchFiredEvent;
+import org.kie.api.event.rule.DefaultAgendaEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * {@code RulesServiceIntegrationTests} represents integration tests for
@@ -96,6 +99,29 @@ class RulesServiceIntegrationTests {
                 Arguments.arguments(5, 5),
                 Arguments.arguments(7, 13),
                 Arguments.arguments(13, 233)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testAgendaEvent(int code, String text, boolean fire, String expectedRule) {
+        final DefaultAgendaEventListener listener = new DefaultAgendaEventListener() {
+            @Override
+            public void afterMatchFired(AfterMatchFiredEvent event) {
+                super.afterMatchFired(event);
+                if (fire) {
+                    assertEquals(expectedRule, event.getMatch().getRule().getName());
+                }
+            }
+        };
+
+        service.agendaEvent(code, text, listener);
+    }
+
+    static Stream<Arguments> testAgendaEvent() {
+        return Stream.of(
+                Arguments.arguments(20, "agenda example rule", true, "agendatest"),
+                Arguments.arguments(30, "agenda example rule", false, null)
         );
     }
 }

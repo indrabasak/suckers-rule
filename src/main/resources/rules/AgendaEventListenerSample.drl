@@ -1,0 +1,12 @@
+import com.basaki.rules.model.AgendaMessage
+
+
+/**
+When this rule matched, the agenda event AfterMatchFiredEvent will be fired
+*/
+rule "agendatest"
+    when
+        AgendaMessage(code == 20, text == "agenda example rule")
+    then
+         System.out.println( "Rule output" );
+end
