@@ -20,7 +20,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * {@code RulesServiceIntegrationTests} represents integration tests for
@@ -77,6 +76,27 @@ class RulesServiceIntegrationTests {
                         Message.Status.HELLO.getValue() + " Do something!"),
                 Arguments.arguments(Message.Status.GOODBYE, "Do nothing!",
                         Message.Status.GOODBYE.getValue() + " Do nothing!")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void testSayHelloWithFilter(Message.Status status, String text, String expected, String[] rules) {
+        Message message = new Message();
+        message.setStatus(status);
+        message.setText(text);
+
+        assertEquals(expected, service.sayHelloWithFilter(message, rules));
+    }
+
+    static Stream<Arguments> testSayHelloWithFilter() {
+        return Stream.of(
+                Arguments.arguments(Message.Status.HELLO, "Do something!",
+                        Message.Status.HELLO.getValue() + " Do something!", new String[] {"Hello World"}),
+                Arguments.arguments(Message.Status.GOODBYE, "Do nothing!",
+                        "Do nothing!", new String[] {"Hello World"}),
+                Arguments.arguments(Message.Status.GOODBYE, "Do nothing!",
+                        Message.Status.GOODBYE.getValue() + " Do nothing!", new String[] {"Good Bye"})
         );
     }
 
