@@ -16,6 +16,8 @@
         <drools.version>7.42.0.Final</drools.version>
         <jacoco.maven.plugin.version>0.8.5</jacoco.maven.plugin.version>
         <java.version>11</java.version>
+        <junit.version>5.6.2</junit.version>
+        <lombok.version>1.18.12</lombok.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -24,7 +26,9 @@
         <maven.surefire.plugin.version>3.0.0-M4</maven.surefire.plugin.version>
         <maven.surefire.report.plugin.version>3.0.0-M4</maven.surefire.report.plugin.version>
         <rest.assured.version>4.3.1</rest.assured.version>
+        <shiuli.version>0.2.0</shiuli.version>
         <spring.boot.version>2.4.0-SNAPSHOT</spring.boot.version>
+        <springfox.version>3.0.0</springfox.version>
     </properties>
 
     <dependencyManagement>
@@ -78,19 +82,19 @@
         <dependency>
             <groupId>com.github.indrabasak</groupId>
             <artifactId>shiuli</artifactId>
-            <version>0.2.0</version>
+            <version>${shiuli.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
+            <version>${springfox.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version>
+            <version>${springfox.version}</version>
         </dependency>
 
         <dependency>
@@ -112,14 +116,20 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.6.2</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 

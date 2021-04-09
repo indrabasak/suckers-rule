@@ -1,0 +1,21 @@
+import com.basaki.rules.model.biz.RuleEvent;
+import com.basaki.rules.util.Util
+import org.drools.core.spi.KnowledgeHelper;
+import java.time.Instant
+import java.time.Duration;
+
+rule device_age
+    dialect "java"
+    when
+        helper : KnowledgeHelper()
+        $event : RuleEvent(Util.getInteger(getParamValue("device_age", "min_age")) != null &&
+                    Util.getInteger(getParamValue("device_age", "max_age")) != null)
+    then
+        Integer minAge =  Util.getInteger($event.getParamValue(drools.getRule().getName(), "min_age"));
+        Integer maxAge =  Util.getInteger($event.getParamValue(drools.getRule().getName(), "max_age"));
+
+        Instant instant = Instant.now() ;
+        long age = Duration.between(instant, $event.getPayload().getDeviceNode().getTxnTimestamp()).toDays();
+
+        boolean matches = Util.compareAge(age, minAge, maxAge);
+end

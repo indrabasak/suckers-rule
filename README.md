@@ -8,6 +8,19 @@
 Suckers Rule
 ==================================
 
+# Introduction
+Drools is a lightweight rules engine based on the pattern matching Rete algorithm. 
+It has been around since 2001 and maintained by JBoss community.The Drools engine is completely written
+in Java.
+
+## What's a Rule?
+```
+When
+    <Condition is true>
+Then
+    <Take desired Action>
+```
+
 
 [travis-badge]: https://travis-ci.org/indrabasak/suckers-rule.svg?branch=master
 [travis-badge-url]: https://travis-ci.org/indrabasak/suckers-rule/
